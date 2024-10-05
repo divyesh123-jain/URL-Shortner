@@ -35,9 +35,16 @@ async function handleanalytics(req ,res){
     res.json({totalclicks:result.totalclicks.length , analytics:result.totalclicks})
 }
 
+async function handlegetAllShortURLData(req , res){
+    const result = await URL.find({})
+    res.json(result)
+}
+
 module.exports = {
     handleGenerateShortURL,
     handleGetRedirectURL,
-    handleanalytics
+    handleanalytics,
+    handlegetAllShortURLData
+    
  
 }
