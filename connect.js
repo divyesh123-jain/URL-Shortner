@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-
-async function connectDB(url){
-    return mongoose.connect("mongodb+srv://divyeshj301:ApHOaRPsQC6hIhER@cluster1.9rlza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1")
+const dotenv = require('dotenv');
+dotenv.config({ path: "./.env" })
+const url = process.env.MONGODB_URL
+async function connectDB(){
+    return mongoose.connect(url)
     .then(()=>console.log("mongodb is connected"))
     .catch((err) => console.log("mongodb is not connected" , err))
 }
