@@ -8,5 +8,4 @@ router.get('/:shortID' , handleGetRedirectURL)
 
 router.get('/analytics/:shortID' , handleanalytics)
 
-
 module.exports = router
