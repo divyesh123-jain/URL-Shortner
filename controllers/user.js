@@ -1,10 +1,11 @@
 const User = require('../models/user');
-
+const {v4 : uuidv4}  = require("uuid")
+const {setUser} = require('../services/auth')
 async function handleUserSignup(req ,res){
 
     const {name , email , password} = req.body
     await User.create({
-        name,
+        name, 
         email,
         password
     })
@@ -16,15 +17,22 @@ async function handleUserSignup(req ,res){
 async function handleUserLogin(req ,res){
 
     const { email , password} = req.body
-    await User.findOne(
+   const user=  await User.findOne(
         {
             email,
             password
         }
     )
-    if(!User ) return res.json({message: 'Invalid Email or Password'})
+
+   
+    if(!user) return res.json({message: 'Invalid Email or Password'})
 
 
+  
+
+    const sessionId = uuidv4()
+    setUser(sessionId , user)
+    res.cookie('uid' , sessionId , {httpOnly: true})
     res.json({message: 'User Login'})
 }
 module.exports = {
