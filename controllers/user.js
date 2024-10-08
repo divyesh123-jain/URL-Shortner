@@ -30,9 +30,9 @@ async function handleUserLogin(req ,res){
 
   
 
-    const sessionId = uuidv4()
-    setUser(sessionId , user)
-    res.cookie('uid' , sessionId , {httpOnly: true})
+   
+   const token =  setUser( user)
+    res.cookie('uid' , token)
     res.json({message: 'User Login'})
 }
 module.exports = {
