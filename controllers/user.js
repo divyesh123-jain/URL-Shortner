@@ -12,8 +12,6 @@ async function handleUserSignup(req ,res){
 
     res.json({message: 'User created'})
 }
-
-
 async function handleUserLogin(req ,res){
 
     const { email , password} = req.body
@@ -23,17 +21,10 @@ async function handleUserLogin(req ,res){
             password
         }
     )
-
-   
     if(!user) return res.json({message: 'Invalid Email or Password'})
-
-
-  
-
-   
    const token =  setUser( user)
-    res.cookie('uid' , token)
-    res.json({message: 'User Login'})
+    // res.cookie('uid' , token)
+    res.json({token })
 }
 module.exports = {
     handleUserSignup,
